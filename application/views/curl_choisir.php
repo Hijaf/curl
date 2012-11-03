@@ -9,15 +9,17 @@
     <?php foreach ($imgs as $key=>$img): 
             $data = array(
                 'name'        => 'image',
-                'id'          => $key,
-                'value'       => $img,
+                'id'          => 'rad'.$key,
+                'value'       => $img
             );?>
-            <p>
+            <p class="choix">
             <?= form_radio($data);?>
-            <img src="<?=$img?>"/>
+            <label for="<?= 'rad'.$key?>"><img src="<?=$img?>" class="galerie"/></label>
             </p>
     <?php endforeach;?>
-    <p>
+    <p id="submit">
+    <?= form_button(array('id'=>'buttonP','name'=>'button', 'value'=>'Image précédente', 'content'=>'Image précédente'));?>
+    <?= form_button(array('id'=>'buttonS','name'=>'button', 'value'=>'Image suivante', 'content'=>'Image suivante'));?>
     <?= form_submit('monSubmit', 'Envoyer');?>      
     </p>
     <?= form_close()?>

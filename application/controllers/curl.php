@@ -40,37 +40,60 @@ class Curl extends CI_Controller {
             $html=curl_exec($ch);
             curl_close($ch);
 
-            $dom = new DomDocument();
+            $dom = new DomDocument('1.0', 'UTF-8');
             @$dom->loadHTML($html);
-            
-            //titre
-            $nodes = $dom->getElementsByTagName("title");
-            $dataList['titre'] = $nodes->item(0)->nodeValue;
-            
-            //meta
-            $nodes = $dom->getElementsByTagName("meta");
-            foreach($nodes as $node)
+
+            if($html)
             {
-                if(strtolower($node->getAttribute("name"))=="description")
+                //titre
+                $nodes = $dom->getElementsByTagName("title");
+                $dataList['titre'] = $nodes->item(0)->nodeValue;
+
+                //meta
+                $nodes = $dom->getElementsByTagName("meta");
+                foreach($nodes as $node)
                 {
-                    $plein = $node->getAttribute("content");
-                    if($plein)
+                    if(strtolower($node->getAttribute("name"))=="description")
+                    {  
+                        $dataList['description'] = $node->getAttribute("content");
+                    }
+                }
+                if(!isset($dataList['description']))
+                {
+                    $dataList['description'] = "Pas de description pour ".$dataList['titre'];
+                }
+
+                //img
+                $nodes = $dom->getElementsByTagName("img");
+                foreach($nodes as $key=>$img)
+                {
+                    $dataList['imgs'][$key] = $img->getAttribute('src');
+                    if(!strstr($url, "http://"))
                     {
-                        $dataList['description'] = $plein;
+                        $url = "http://".$url;
+                    }
+                    if(!strstr($dataList['imgs'][$key], "http://"))
+                    {
+                        if($dataList['imgs'][$key][0]!=="/")
+                        {
+                            $dataList['imgs'][$key] = $url."/".$dataList['imgs'][$key];
+                        }
+                        else
+                        {
+                            $dataList['imgs'][$key] = $url.$dataList['imgs'][$key];
+                        }
                     }
                     else
                     {
-                        $dataList['description'] = $dataList['titre'];
-                    }   
+                        $dataList['imgs'][$key] = $img->getAttribute('src');
+                    }
                 }
             }
-            
-            //img
-            $nodes = $dom->getElementsByTagName("img");
-            foreach($nodes as $key=>$img)
+            else
             {
-                $dataList['imgs'][$key] = $img->getAttribute('src');
+                var_dump("cURL n'a pas retourné de HTML");
             }
+            
             
             
             $dataLayout['vue'] = $this->load->view('curl_choisir', $dataList, TRUE);
@@ -80,6 +103,7 @@ class Curl extends CI_Controller {
         public function lister()
         {
             $this->load->helper('form');
+            $this->load->helper('date');
             $this->load->model("M_Curl");
             
             $dataList['articles'] = $this->M_Curl->lister();
@@ -93,9 +117,10 @@ class Curl extends CI_Controller {
             $titre = $this->input->post('titre');
             $description = $this->input->post('description');
             $image = $this->input->post('image');
+            $time = time();
             $this->load->model("M_Curl");
             
-            $dataForm = array( 'titre'=> $titre,'description'=> $description, 'image'=> $image);
+            $dataForm = array( 'titre'=> $titre,'description'=> $description, 'image'=> $image, 'temps'=>$time);
             
             $this->M_Curl->inserer($dataForm);
             
@@ -107,10 +132,43 @@ class Curl extends CI_Controller {
             $this->load->helper('form');
             $this->load->model("M_Curl");
             $id = $this->uri->segment(3);
+            if($this->input->is_ajax_request())
+            {
+                $this->M_Curl->delete($id);
+            }
+            else
+            {
+                $this->M_Curl->delete($id);
+                redirect('');
+            }
+        } 
+        
+        public function modifier()
+        {
+            $this->load->helper('form');
+            $this->load->model("M_Curl");
+            $id = $this->uri->segment(3);
             
-            $this->M_Curl->delete($id);
+            $dataList['art'] = $this->M_Curl->recupererLigne($id);
+            
+            $dataLayout['vue'] = $this->load->view('curl_modif', $dataList, TRUE);
+            $this->load->view('layout', $dataLayout);
+        }
+        
+        public function maj()
+        {
+            $this->load->helper('form');
+            $this->load->model('M_Curl');
+            $titre = $this->input->post('titre');
+            $description = $this->input->post('description');
+            $id = $this->input->post('id');
+            
+            $dataForm = array( 'titre'=> $titre,'description'=> $description, 'id'=>$id);
+            
+            $this->M_Curl->update($dataForm);
+            
             redirect('');
-        }     
+        }
 }
 
 /* End of file welcome.php */
