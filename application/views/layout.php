@@ -7,7 +7,7 @@
 </head>
 <body>
     <header>
-        <h1><a href="<?= site_url()?>">CURLing Me</a></h1>
+        <h1><a href="<?= site_url()?>" title="Vers l'accueil du site">CURLing Me</a></h1>
     </header>
     <div id="curl">    
             <?= $vue?>

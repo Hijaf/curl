@@ -21,9 +21,16 @@ class Curl extends CI_Controller {
 	{
             $this->load->helper('form');
            
-            $dataLayout['titre'] = 'CURL - Recupération URL';
-         
-            $this->lister();
+
+            if(isset($urlValid))
+            {
+                $urlValid = $urlValid;
+            }
+            else
+            {
+                $urlValid=false;
+            }
+            $this->lister($urlValid);
             
 	}
         
@@ -70,7 +77,7 @@ class Curl extends CI_Controller {
                     $dataList['imgs'][$key] = $img->getAttribute('src');
                     if(!strstr($url, "http://"))
                     {
-                        $url = "http://".$url;
+                        $url = prep_url($url);
                     }
                     if(!strstr($dataList['imgs'][$key], "http://"))
                     {
@@ -88,25 +95,27 @@ class Curl extends CI_Controller {
                         $dataList['imgs'][$key] = $img->getAttribute('src');
                     }
                 }
+                $urlValid=true;
+                $dataLayout['vue'] = $this->load->view('curl_choisir', $dataList, TRUE);
+                $this->load->view('layout', $dataLayout);
             }
             else
             {
-                var_dump("cURL n'a pas retourné de HTML");
-            }
-            
-            
-            
-            $dataLayout['vue'] = $this->load->view('curl_choisir', $dataList, TRUE);
-            $this->load->view('layout', $dataLayout);
+                //test si html renvoyé est invalide
+                $urlValid=false;
+                $this->lister($urlValid);
+                redirect('');
+            }  
         }
         
-        public function lister()
+        public function lister($urlValid)
         {
             $this->load->helper('form');
             $this->load->helper('date');
             $this->load->model("M_Curl");
             
             $dataList['articles'] = $this->M_Curl->lister();
+            $dataList['urlValid'] = $urlValid;
             
             $dataLayout['vue'] = $this->load->view('curl_form', $dataList, TRUE);
             $this->load->view('layout', $dataLayout);
@@ -159,17 +168,27 @@ class Curl extends CI_Controller {
         {
             $this->load->helper('form');
             $this->load->model('M_Curl');
-            $titre = $this->input->post('titre');
-            $description = $this->input->post('description');
-            $id = $this->input->post('id');
             
-            $dataForm = array( 'titre'=> $titre,'description'=> $description, 'id'=>$id);
-            
-            $this->M_Curl->update($dataForm);
-            
-            redirect('');
+            if($this->input->is_ajax_request())
+            {
+               $titre = $this->input->post('titre');
+               $description = $this->input->post('description');
+               $id = $this->input->post('id');
+               $dataForm = array( 'titre'=> $titre,'description'=> $description, 'id'=>$id);
+               $this->M_Curl->update($dataForm);
+            }
+            else
+            {
+               $titre = $this->input->post('titre');
+               $description = $this->input->post('description');
+               $id = $this->input->post('id');
+               $dataForm = array( 'titre'=> $titre,'description'=> $description, 'id'=>$id);
+               $this->M_Curl->update($dataForm);
+
+               redirect('');   
+            }
         }
 }
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+/* End of file curl.php */
+/* Location: ./application/controllers/curl.php */

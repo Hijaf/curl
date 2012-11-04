@@ -4,6 +4,8 @@ $(function(){
         $img = $('.choix'),
         index = 0,
         compteur = 1,
+        description,
+        titre,
         idArticle;
 
     trombiSize = $($img).size();
@@ -31,9 +33,9 @@ $(function(){
     
     function bougerP(){
         $img.eq(index).hide();
-        if(index == trombiSize-1){
-            index = 0;
-            compteur = 1;
+        if(index == 0){
+            index = 6;
+            compteur = 7;
         }
         else{
             index--;
@@ -55,8 +57,29 @@ $(function(){
           }
         });   
     });
-});
-
-
     
-
+    $('.modif').on('click', function(e){
+       e.preventDefault();
+       idArticle = $(this).attr('href').split("/");
+       titre = $('#id'+idArticle[6]+' h3').hide().text();
+       $('#id'+idArticle[6]+' h3').after(function(){return '<input class="inputTitre" name="titre" type="text" value="'+titre+'"/>'});
+       description = $('#id'+idArticle[6]+' .descrip').hide().text();
+       $('#id'+idArticle[6]+' .descrip').after(function(){return '<textarea class="descripText" name="description">'+description+'</textarea>'})
+       $('#id'+idArticle[6]+' .descripText').after(function(){return '<p id="submitModif"><input type="submit" value="Valider les modifications" class="monSubmit bouton"><input type="button" value="Annuler les modifications" class="monAnnuler bouton"></p>'});
+       
+       $('.monSubmit').on('click', function(e){
+          $.ajax({url: "http://localhost/curl/curl/maj/", 
+          type: "POST",
+          dataType: "json",
+          data: {titre: $(".inputTitre").val(), description: $(".descripText").val(), id: idArticle[6]},
+          success:function(){
+                window.location.reload();
+          }
+        });           
+       });
+       
+       $('.monAnnuler').on('click',function(e){
+          window.location.reload(); 
+       });
+    });
+});

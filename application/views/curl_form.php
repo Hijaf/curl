@@ -3,9 +3,10 @@
         <p class="form1">
         <?= form_label('URL :', 'url');?>
         <?= form_input(array('id'=>'url', 'name'=>'url', 'placeholder'=>'Entrez une url', 'size'=>'68'));?>
+        <?php if(!$urlValid){echo('Veuillez rentrer une URL valide');}?>
         </p>
         <p class="form1">
-        <?= form_submit('monSubmit', 'Envoyer');?>      
+        <?= form_submit(array('name'=>'monSubmit', 'value'=>'Envoyer', 'class'=>'bouton'));?>      
         </p>
         <?= form_close()?>
         <div>
@@ -14,11 +15,11 @@
             <?php foreach ($articles as $article):?>
                 <div class="article" id="<?= 'id'.$article->id?>">
                     <h3> <?=$article->titre?></h3>
-                    <p id="temps">L'article a été publié il y a <?= timespan($article->temps);?></p>
-                    <p id="img"><img src="<?= $article->image?>"/></p>
-                    <p id="descrip"> <?= $article->description?></p>
-                    <p id="liens">
-                        <?= anchor('curl/supprimer/'.$article->id,'Supprimer la publication', array('title'=>'Supprimer la publication', 'class'=>'suppr'));?> - <?= anchor('curl/modifier/'.$article->id,'Modifier la publication', array('title'=>'Modifier la publication', 'id'=>'modif'));?>
+                    <p class="temps">L'article a été publié il y a <?= timespan($article->temps);?></p>
+                    <p class="img"><img src="<?= $article->image?>"/></p>
+                    <p class="descrip"> <?= $article->description?></p>
+                    <p class="liens">
+                        <?= anchor('curl/supprimer/'.$article->id,'Supprimer la publication', array('title'=>'Supprimer la publication', 'class'=>'suppr'));?> - <?= anchor('curl/modifier/'.$article->id,'Modifier la publication', array('title'=>'Modifier la publication', 'class'=>'modif'));?>
                     </p>
                 </div>
             <?php endforeach;endif;?>

@@ -18,9 +18,9 @@
             </p>
     <?php endforeach;?>
     <p id="submit">
-    <?= form_button(array('id'=>'buttonP','name'=>'button', 'value'=>'Image précédente', 'content'=>'Image précédente'));?>
-    <?= form_button(array('id'=>'buttonS','name'=>'button', 'value'=>'Image suivante', 'content'=>'Image suivante'));?>
-    <?= form_submit('monSubmit', 'Envoyer');?>      
+    <?= form_button(array('id'=>'buttonP','name'=>'button', 'value'=>'Image précédente', 'content'=>'Image précédente', 'class'=>'bouton'));?>
+    <?= form_button(array('id'=>'buttonS','name'=>'button', 'value'=>'Image suivante', 'content'=>'Image suivante', 'class'=>'bouton'));?>
+    <?= form_submit(array('name'=>'monSubmit', 'value'=>'Envoyer', 'class'=>'bouton'));?>      
     </p>
     <?= form_close()?>
 </div>

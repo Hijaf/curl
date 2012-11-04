@@ -6,7 +6,7 @@
     <?= form_hidden('id', $art->id);?>
     </p>    
     <p id="submit">
-    <?= form_submit('monSubmit', 'Envoyer');?>      
+    <?= form_submit(array('name'=>'monSubmit', 'value'=>'Valider la modification', 'class'=>'bouton'));?>      
     </p>
     <?= form_close()?>
 </div>

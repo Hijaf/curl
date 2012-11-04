@@ -108,31 +108,46 @@ h3{
     font-size: 1.3em;
     clear: both;
 }
+.inputTitre{
+    margin: 0.1em auto 0.5em;
+    display: block;
+    width: 922px;
+    font-size: 1.3em;
+    clear: both;
+}
 
 .article{
-    margin-top: 1.2em;
+    margin-bottom: 1.2em;
     background-color: rgba(232,232,232,0.6);
     padding: 14px;
     border: 2px solid #DBDBDB;
 }
-#temps{
+.temps{
     margin: 0.2em auto 0.2em 0.5em;
     font-size: 0.9em;
 }
 
-#img{
+.img{
     max-width: 478px;
      float: left;
 }
 
-#img img{
+.img img{
     width: 100%;
     border: 4px solid white;
 }
 
-#descrip{
+.descrip{
     width: 430px;
     margin-left: 20px;
+    float:right;
+}
+
+.descripText{
+    width: 430px;
+    height: 250px;
+    resize: none;
+    margin-left: 14px;
     float:right;
 }
 
@@ -140,7 +155,7 @@ a{
     color: #0134c5;
 }
 
-#liens{
+.liens{
     margin: 0em auto 0.4em;
     padding-top: 0.3em;
     width: 100%;
@@ -150,23 +165,58 @@ a{
 .choix{
     float:left;
     height: 150px;
-    max-width: 200px;
-}
-
-.compteur{
-    margin: -0.7em 0em 0.5em 0em;
-    width: 150px;
-    text-align: center;
 }
 
 #submit{
     clear: both;
-    padding-top: 1.2em;
+}
+
+#submit .compteur{
+    margin: 0em;
+    padding-top: 0.5em;
+    width: 150px;
+}
+
+#submit input{
+    margin: 0.5em 0.5em 0em 0em;
+}
+
+#submitModif{
+    margin-left: 20px;
+    clear: both;
+}
+
+#submitModif input{
+    margin: 0.5em 1.5em 0em 0em;
+    float: right;
+}
+
+.bouton{
+    background: #52a0f3;
+    background: -webkit-gradient(linear, left top, left bottom, from(#0b4aa1), to(#52a0f3));
+    background: -webkit-linear-gradient(top, #0b4aa1, #52a0f3);
+    background: -moz-linear-gradient(top, #0b4aa1, #52a0f3);
+    background: -ms-linear-gradient(top, #0b4aa1, #52a0f3);
+    background: -o-linear-gradient(top, #0b4aa1, #52a0f3);
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    text-shadow: rgba(0,0,0,.4) 0 1px 0;
+    color: white;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.bouton:hover {
+   border-top-color: #52a0f3;
+   background: #52a0f3;
+   color: #ffffff;
 }
 
 .input{
     display: inline-block;
     width: 960px;
+    margin-bottom: 1em;
 }
 
 .galerie{
