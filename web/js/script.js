@@ -34,8 +34,8 @@ $(function(){
     function bougerP(){
         $img.eq(index).hide();
         if(index == 0){
-            index = 6;
-            compteur = 7;
+            index = trombiSize-1;
+            compteur = trombiSize;
         }
         else{
             index--;

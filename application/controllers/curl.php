@@ -28,7 +28,7 @@ class Curl extends CI_Controller {
             }
             else
             {
-                $urlValid=false;
+                $urlValid=true;
             }
             $this->lister($urlValid);
             
