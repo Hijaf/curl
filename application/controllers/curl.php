@@ -2,41 +2,27 @@
 
 class Curl extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
-	public function index()
-	{
-            $this->load->helper('form');
-           
-
-            if(isset($urlValid))
-            {
-                $urlValid = $urlValid;
-            }
-            else
-            {
-                $urlValid=true;
-            }
-            $this->lister($urlValid);
+	public function __construct()
+        {
+            parent::__construct();
             
+            $this->load->model("M_Curl");
+            $this->load->helper('form');
+        }
+        
+	public function index($urlValid = 1)
+        {
+            $this->load->helper('date');
+            
+            $dataList['articles'] = $this->M_Curl->lister();
+            $dataList['urlValid'] = $urlValid;
+            
+            $dataLayout['vue'] = $this->load->view('curl_form', $dataList, TRUE);
+            $this->load->view('layout', $dataLayout);
 	}
         
         public function ajouter()
         {
-            $this->load->helper('form');
             $url = $this->input->post('url');
             
             $ch=curl_init();
@@ -79,6 +65,7 @@ class Curl extends CI_Controller {
                     {
                         $url = prep_url($url);
                     }
+                    $this->rel2abs();
                     if(!strstr($dataList['imgs'][$key], "http://"))
                     {
                         if($dataList['imgs'][$key][0]!=="/")
@@ -95,68 +82,43 @@ class Curl extends CI_Controller {
                         $dataList['imgs'][$key] = $img->getAttribute('src');
                     }
                 }
-                $urlValid=true;
+                
                 $dataLayout['vue'] = $this->load->view('curl_choisir', $dataList, TRUE);
                 $this->load->view('layout', $dataLayout);
             }
             else
             {
                 //test si html renvoyé est invalide
-                $urlValid=false;
-                $this->lister($urlValid);
-                redirect('');
+                redirect('curl/index/0');
             }  
         }
         
-        public function lister($urlValid)
-        {
-            $this->load->helper('form');
-            $this->load->helper('date');
-            $this->load->model("M_Curl");
-            
-            $dataList['articles'] = $this->M_Curl->lister();
-            $dataList['urlValid'] = $urlValid;
-            
-            $dataLayout['vue'] = $this->load->view('curl_form', $dataList, TRUE);
-            $this->load->view('layout', $dataLayout);
-        }
-        
         public function choisir()
-        {
-            $titre = $this->input->post('titre');
-            $description = $this->input->post('description');
-            $image = $this->input->post('image');
-            $time = time();
-            $this->load->model("M_Curl");
-            
-            $dataForm = array( 'titre'=> $titre,'description'=> $description, 'image'=> $image, 'temps'=>$time);
+        {           
+            $dataForm = array( 
+                'titre'=> $this->input->post('titre'),
+                'description'=> $this->input->post('description'), 
+                'image'=> $this->input->post('image'), 
+                'temps'=> time()
+            );
             
             $this->M_Curl->inserer($dataForm);
             
             redirect('');
         }
         
-        public function supprimer()
+        public function supprimer($id)
         {
-            $this->load->helper('form');
-            $this->load->model("M_Curl");
-            $id = $this->uri->segment(3);
-            if($this->input->is_ajax_request())
+            $this->M_Curl->delete($id);
+            
+            if(!$this->input->is_ajax_request())
             {
-                $this->M_Curl->delete($id);
-            }
-            else
-            {
-                $this->M_Curl->delete($id);
                 redirect('');
             }
         } 
         
-        public function modifier()
+        public function modifier($id)
         {
-            $this->load->helper('form');
-            $this->load->model("M_Curl");
-            $id = $this->uri->segment(3);
             
             $dataList['art'] = $this->M_Curl->recupererLigne($id);
             
@@ -166,27 +128,21 @@ class Curl extends CI_Controller {
         
         public function maj()
         {
-            $this->load->helper('form');
-            $this->load->model('M_Curl');
+            $titre = $this->input->post('titre');
+            $description = $this->input->post('description');
+            $id = $this->input->post('id');
+            $dataForm = array( 'titre'=> $titre,'description'=> $description, 'id'=>$id);
+            $this->M_Curl->update($dataForm);
             
-            if($this->input->is_ajax_request())
+            if(!$this->input->is_ajax_request())
             {
-               $titre = $this->input->post('titre');
-               $description = $this->input->post('description');
-               $id = $this->input->post('id');
-               $dataForm = array( 'titre'=> $titre,'description'=> $description, 'id'=>$id);
-               $this->M_Curl->update($dataForm);
-            }
-            else
-            {
-               $titre = $this->input->post('titre');
-               $description = $this->input->post('description');
-               $id = $this->input->post('id');
-               $dataForm = array( 'titre'=> $titre,'description'=> $description, 'id'=>$id);
-               $this->M_Curl->update($dataForm);
-
                redirect('');   
             }
+        }
+        
+        private function rel2abs()
+        {
+            
         }
 }
 

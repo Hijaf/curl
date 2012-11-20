@@ -62,7 +62,7 @@ $(function(){
        e.preventDefault();
        idArticle = $(this).attr('href').split("/");
        titre = $('#id'+idArticle[6]+' h3').hide().text();
-       $('#id'+idArticle[6]+' h3').after(function(){return '<input class="inputTitre" name="titre" type="text" value="'+titre+'"/>'});
+       $('#id'+idArticle[6]+' h3').after($('<input class="inputTitre" name="titre" type="text" value="'+titre+'"/>'));
        description = $('#id'+idArticle[6]+' .descrip').hide().text();
        $('#id'+idArticle[6]+' .descrip').after(function(){return '<textarea class="descripText" name="description">'+description+'</textarea>'})
        $('#id'+idArticle[6]+' .descripText').after(function(){return '<p id="submitModif"><input type="submit" value="Valider les modifications" class="monSubmit bouton"><input type="button" value="Annuler les modifications" class="monAnnuler bouton"></p>'});
