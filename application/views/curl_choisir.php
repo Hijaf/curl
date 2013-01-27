@@ -1,8 +1,9 @@
 <div>
-    <?= form_open('curl/choisir', array('method'=>'post'));?>
+    <?= form_open('curl/choisir', array('method'=>'post','id'=>'formuChoix'));?>
     <p>  
     <?= form_hidden('titre', $titre);?>
     <?= form_hidden('description', $description);?>
+    <?= form_hidden('urlSite', $urlSite);?>
     </p>
     <h2><?= $titre?></h2>
     <p><?= $description?></p>

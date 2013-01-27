@@ -48,10 +48,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = '';
-$db['default']['database'] = 'codeIgniter';
+$db['default']['hostname'] = 'mysql5-15.perso';
+$db['default']['username'] = 'gkeckbelbdd';
+$db['default']['password'] = 'counter18';
+$db['default']['database'] = 'gkeckbelbdd';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

@@ -1,0 +1,314 @@
+/* http://meyerweb.com/eric/tools/css/reset/ */
+/* v1.0 | 20080212 */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+body {
+    line-height: 1.4;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+/* remember to define focus styles! */
+:focus {
+    outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+    text-decoration: none;
+}
+del {
+    text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+/******************************************************/
+
+body{
+    background: url('../img/bright_squares2.png');
+    font-size: 14px;
+    font-family: Arial,sans-serif;
+}
+
+#curl{
+    max-width: 1860px;
+    margin: auto;
+}
+
+header{
+    background: #68a1d6; /* Old browsers */
+    background: -moz-linear-gradient(top,  #68a1d6 0%, #1077d1 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#68a1d6), color-stop(100%,#1077d1)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #68a1d6 0%,#1077d1 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #68a1d6 0%,#1077d1 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #68a1d6 0%,#1077d1 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #68a1d6 0%,#1077d1 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#68a1d6', endColorstr='#1077d1',GradientType=0 ); /* IE6-9 */
+    -webkit-box-shadow:  0px 1px 2px 0px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow:  0px 1px 2px 0px rgba(0, 0, 0, 0.6);
+    box-shadow:  0px 1px 2px 0px rgba(0, 0, 0, 0.6);
+}
+
+header h1{
+    max-width: 960px;
+    margin: 0em auto 1em;
+    line-height: 2em;
+    font-size: 1.8em;
+}
+h1 a{
+    color: white;
+    text-decoration: none;
+    text-shadow: 0px -1px 0px rgba(0,0,200,1),
+                 0px 1px 1px rgba(50,50,200,1);
+}
+
+form{
+    background-color: rgba(255,255,255,0.6);
+    padding: 14px;
+    border: 2px solid #FFFFFF;
+    margin: auto 7px;
+}
+
+.form1{
+    margin-top: 0.5em;
+    label{
+        display: block;
+        width: 100%;
+        text-align: center;
+        font-size: 20px;
+        margin-bottom: 14px;
+    }
+    #url{
+        width: 100%;
+        max-width: 1808px;
+        height:20px;
+        text-align: center;
+        font-size: 18px;
+        margin: 7px 0;
+    }
+    .bouton{
+        background: #FFA124;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        text-shadow: rgba(0,0,0,.4) 0 1px 0;
+        color: white;
+        font-size: 20px;
+        //font-weight: bold;
+        text-decoration: none;
+        height: 50px;
+        width: 100%;
+    }
+    .bouton:hover {
+       border-top-color: #52a0f3;
+       background: #52a0f3;
+       color: #ffffff;
+    }
+}
+
+h2{
+    margin: 1em 7px;
+    color: #476ACC;
+    font-size: 1.6em;
+    background-color: rgba(255,255,255,0.6);
+    padding: 14px;
+    border: 2px solid #FFFFFF;
+    text-align: center;
+}
+
+h3{
+    margin: 0.1em auto 0.5em;
+    font-size: 1.3em;
+    clear: both;
+}
+.inputTitre{
+    margin: 0.1em auto 0.5em;
+    display: block;
+    width: 258px;
+    font-size: 1.3em;
+    clear: both;
+}
+
+.article{
+    width: 278px;
+    height: 278px;
+    float: left;
+    margin: 0 7px 17px 7px;
+    background-color: rgba(255,255,255,0.6);
+    padding: 7px;
+    border: 2px solid #FFFFFF;
+    overflow: auto;
+}
+
+.cdc{
+    width: 296px;
+    height: 296px;
+    float: left;
+    margin: 0 7px 17px 7px;
+    background-color: rgb(255,255,255);
+    color: white;
+}
+
+.temps{
+    margin: 0.2em auto 0.2em 0.5em;
+    font-size: 0.9em;
+}
+
+.img{ 
+    text-align: center;
+    img{
+        max-width: 275px;
+        max-height: 275px;
+        border: 4px solid white;
+    }
+}
+
+.descrip{
+    margin-bottom: 7px;
+}
+
+.descripText{
+    width: 258px;
+    height: 250px;
+    resize: none;
+    margin-left: 14px;
+    float:right;
+}
+
+a{
+    color: #0134c5;
+}
+
+.liens{
+    margin: 0em auto 0.4em;
+    padding-top: 0.3em;
+    text-align: center;
+    width: 100%;
+}
+#formuChoix{
+    p{
+        margin: 7px 0;
+        text-align: center;
+        font-size: 16px;
+    }
+    .choix{
+        height: 150px;
+        margin: 20px 0 7px 0;
+        img{
+            border: 5px solid #5B7994;
+        }
+    }
+    .bouton{
+        background: #FFA124;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        text-shadow: rgba(0,0,0,.4) 0 1px 0;
+        color: white;
+        font-size: 20px;
+        //font-weight: bold;
+        text-decoration: none;
+        height: 50px;
+    }
+    .bouton:hover {
+       border-top-color: #52a0f3;
+       background: #52a0f3;
+       color: #ffffff;
+    }
+}
+
+#submit{
+    clear: both;
+    .compteur{
+        margin: 0em;
+        padding-top: 1em;
+        font-weight: bold;
+    }
+
+    input{
+        margin: 0.5em 0.5em 0em 0em;
+    }
+}
+
+#submitModif{
+    margin-left: 20px;
+    .bouton{
+        background: #FFA124;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        text-shadow: rgba(0,0,0,.4) 0 1px 0;
+        color: white;
+        font-size: 20px;
+        //font-weight: bold;
+        text-decoration: none;
+        height: 50px;
+        width: 100%;
+    }
+}
+
+#submitModif input{
+    margin: 0.5em 1.5em 0em 0em;
+    float: right;
+}
+.input{
+    display: inline-block;
+    width: 960px;
+    margin-bottom: 1em;
+}
+
+.galerie{
+    height: 100%;
+}
+@media only screen and (min-width: 480px) and (max-width: 767px){
+    #formuChoix{
+        .choix{
+            height: 150px;
+            img{
+                max-width: 100%;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 479px){
+    #formuChoix{
+        .choix{
+            height: 150px;
+            img{
+                max-width: 100%;
+            }
+        }
+    }
+}

@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/curl/';
+$config['base_url']	= 'http://www.gkeck.be/curl/';
 
 /*
 |--------------------------------------------------------------------------

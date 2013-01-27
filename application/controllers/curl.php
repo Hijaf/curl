@@ -35,7 +35,7 @@ class Curl extends CI_Controller {
 
             $dom = new DomDocument('1.0', 'UTF-8');
             @$dom->loadHTML($html);
-
+            
             if($html)
             {
                 //titre
@@ -65,7 +65,7 @@ class Curl extends CI_Controller {
                     {
                         $url = prep_url($url);
                     }
-                    $this->rel2abs();
+                    //$this->rel2abs();
                     if(!strstr($dataList['imgs'][$key], "http://"))
                     {
                         if($dataList['imgs'][$key][0]!=="/")
@@ -82,7 +82,7 @@ class Curl extends CI_Controller {
                         $dataList['imgs'][$key] = $img->getAttribute('src');
                     }
                 }
-                
+                $dataList['urlSite'] = $url;
                 $dataLayout['vue'] = $this->load->view('curl_choisir', $dataList, TRUE);
                 $this->load->view('layout', $dataLayout);
             }
@@ -98,7 +98,8 @@ class Curl extends CI_Controller {
             $dataForm = array( 
                 'titre'=> $this->input->post('titre'),
                 'description'=> $this->input->post('description'), 
-                'image'=> $this->input->post('image'), 
+                'image'=> $this->input->post('image'),
+                'urlSite'=> $this->input->post('urlSite'),
                 'temps'=> time()
             );
             
@@ -138,11 +139,6 @@ class Curl extends CI_Controller {
             {
                redirect('');   
             }
-        }
-        
-        private function rel2abs()
-        {
-            
         }
 }
 

@@ -7,6 +7,7 @@
                 'titre' => $dataForm['titre'] ,
                 'description' => $dataForm['description'] ,
                 'image' => $dataForm['image'],
+                'urlSite'=> $dataForm['urlSite'],
                 'temps' => $dataForm['temps']
             );
 
@@ -15,7 +16,7 @@
         
         public function lister()
         {
-            $this->db->select('id, titre, description, image, temps');
+            $this->db->select('id, titre, description, image, urlSite, temps');
             $this->db->from('ci_curl');
             $this->db->order_by('id', "desc"); 
             
